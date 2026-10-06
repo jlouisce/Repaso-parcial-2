@@ -216,8 +216,7 @@ function crearElemento(etiqueta, clase, texto) {
 // Recibe un número (ej: 75.99) y lo devuelve como texto con
 // símbolo de dólar y 2 decimales fijos -> "$75.99".
 function formatearPrecio(precio) {
-    return "$" + precio.toF
-    ixed(2);
+    return "$" + precio.toFixed(2);
 }
 
 // Construye UNA reseña completa como un <li>.
