@@ -1,0 +1,218 @@
+/* ============================================================
+   VARIABLES DE COLOR Y DISEÑO
+   Se definen una sola vez aquí y se reutilizan con var(...).
+   ============================================================ */
+:root {
+    --color-primario: #1a73e8;
+    --color-primario-hover: #1666c9;
+    --color-fondo: #f4f5f7;
+    --color-tarjeta: #ffffff;
+    --color-texto: #202124;
+    --color-texto-suave: #5f6368;
+    --color-borde: #e3e5e8;
+    --color-deshabilitado: #bdbdbd;
+    --radio: 10px;
+    --sombra: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --sombra-hover: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+/* Reset: quita márgenes/paddings por defecto y hace que el
+   ancho incluya el borde y el padding (box-sizing). */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales de la página */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.45;
+    padding: 32px 24px 64px;
+}
+
+/* Título principal del catálogo */
+.titulo-catalogo {
+    text-align: center;
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+/* Contenedor de las tarjetas.
+   Grid responsivo: crea columnas de mínimo 250px que se
+   acomodan solas según el ancho de la pantalla. */
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cada tarjeta de producto */
+.tarjeta {
+    background-color: var(--color-tarjeta);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Efecto al pasar el mouse: se eleva un poco */
+.tarjeta:hover {
+    box-shadow: var(--sombra-hover);
+    transform: translateY(-2px);
+}
+
+/* Imagen del producto: ocupa todo el ancho y se recorta parejo */
+.tarjeta__imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background-color: #eceff1;
+}
+
+/* Contenedor interno de la tarjeta (textos y botones) */
+.tarjeta__contenido {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.tarjeta__nombre {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.tarjeta__descripcion {
+    font-size: 0.88rem;
+    color: var(--color-texto-suave);
+    flex: 1; /* Empuja el precio y botones hacia abajo */
+}
+
+.tarjeta__precio {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+/* Estilo base de todos los botones */
+.boton {
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s ease;
+}
+
+/* Botón "Agregar al Carrito" */
+.boton--carrito {
+    width: 100%;
+    background-color: var(--color-primario);
+    color: #ffffff;
+}
+
+/* Solo cambia de color al pasar el mouse si NO está deshabilitado */
+.boton--carrito:hover:not(:disabled) {
+    background-color: var(--color-primario-hover);
+}
+
+/* Aspecto cuando el botón está deshabilitado (ya se agregó) */
+.boton--carrito:disabled {
+    background-color: var(--color-deshabilitado);
+    color: #ffffff;
+    cursor: default;
+}
+
+/* Botón "Mostrar Reseñas" */
+.boton--resenas {
+    align-self: flex-start; /* No ocupa todo el ancho */
+    background-color: var(--color-primario);
+    color: #ffffff;
+}
+
+.boton--resenas:hover {
+    background-color: var(--color-primario-hover);
+}
+
+/* Lista de reseñas */
+.resenas {
+    list-style: none;
+    margin-top: 10px;
+    border-top: 1px solid var(--color-borde);
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Clase que OCULTA las reseñas. El JS la agrega/quita con toggle() */
+.resenas--ocultas {
+    display: none;
+}
+
+/* Cada reseña individual */
+.resena {
+    background-color: #f8f9fb;
+    border-radius: 6px;
+    padding: 8px 10px;
+}
+
+/* Cabecera de la reseña: usuario a la izquierda, fecha a la derecha */
+.resena__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.resena__usuario {
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.resena__fecha {
+    font-size: 0.72rem;
+    color: var(--color-texto-suave);
+}
+
+.resena__texto {
+    font-size: 0.82rem;
+    color: var(--color-texto-suave);
+}
+
+/* Mensaje cuando el producto no tiene reseñas */
+.resenas__vacio {
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+    font-style: italic;
+}
+
+/* Reglas para pantallas pequeñas (celulares) */
+@media (max-width: 480px) {
+    body {
+        padding: 20px 12px 40px;
+    }
+
+    .titulo-catalogo {
+        font-size: 1.5rem;
+    }
+
+    /* Una sola columna en móvil */
+    .catalogo {
+        grid-template-columns: 1fr;
+    }
+}
